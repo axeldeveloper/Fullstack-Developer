@@ -1,0 +1,94 @@
+<div class="box-login">
+  <div class="card-login">
+      <div class="container p-0">
+        <div class="col-lg-12 text-light">
+          <div class="card-body">
+            <div class="card-title p-2">
+              <h2>
+                Edit <%= resource_name.to_s.humanize %>
+              </h2>
+            </div>
+              <div class="wow fadeIn" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                <div class="d-flex justify-content-center">
+                  <% if current_user.photo.attached? %>
+                  <%= image_tag current_user.photo, class: "avatar-edit", crop: :fill %>
+                  <% else %>
+                    <%= image_tag("/assets/default_profile.jpg", class: "avatar-edit") %>
+                  <% end %>
+                </div>
+
+                <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                  <div class="p-5 rounded contact-form">
+                    <%= f.error_notification %>
+                        <div class="mb-4">
+                          <%= f.input :full_name,
+                            required: true,
+                            input_html: { class: 'border-0 py-3'} %>
+                        </div>
+
+                        <div class="mb-4">
+                          <%= f.input :email,
+                            required: true,
+                            autofocus: true,
+                            input_html: { class: 'border-0 py-3'} %>
+                            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+                          <% end %>
+                        </div>
+
+                        <div class="mb-4">
+                          <%= f.input :password,
+                              hint: "leave it blank if you don't want to change it",
+                              required: false,
+                              input_html: { class: 'border-0 py-3', autocomplete: "new-password" } %>
+                        </div>
+
+                        <div class="mb-4">
+                          <%= f.input :password_confirmation,
+                            required: false,
+                            input_html: { class: 'border-0 py-3', autocomplete: "new-password" } %>
+                        </div>
+
+                        <div class="mb-4">
+                          <%= f.input :current_password,
+                            hint: "we need your current password to confirm your changes",
+                            required: true,
+                            input_html: { class: 'border-0 py-3', autocomplete: "current-password" } %>
+                        </div>
+
+                        <div class="mb-4">
+                          <%= f.input :photo, as: :file,
+                            input_html: { class: 'border-0 py-3'},
+                            required: false %>
+                        </div>
+
+                      <div class="form-actions">
+                        <%= f.button :submit, "Update",
+                            class: "btn bg-primary text-white py-3 px-5" %>
+
+                        <%= link_to "Back", :back, class: 'btn bg-primary text-white py-3 px-5' %>
+
+                      </div>
+
+                      <h4 class="card-title my-2">
+                        Cancel my account
+                      </h4>
+
+                      <div>
+                          Unhappy? :( <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger text-light mt-1" %>
+                      </div>
+
+                  </div>
+
+                <% end %>
+
+
+
+                
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

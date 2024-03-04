@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+    <<: *default
+    database: desafio_full_stack
+    username: postgres
+    password: postgres
+    host: localhost
+    port: 5432
+
+test:
+  <<: *default
+  database: desafio_full_test
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>

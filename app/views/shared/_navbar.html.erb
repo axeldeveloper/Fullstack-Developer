@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      LOGO
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "Home", root_path , class: "nav-link active" %>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <div class="navbar-text ms-auto">
+        <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+            <% if current_user.photo.attached? %>
+              <%= image_tag current_user.photo, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% else %>
+              <%= image_tag("/assets/default_profile.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false) %>
+            <% end %>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <% if current_user.role? %>
+            <li>
+              <%= link_to "Profile", users_path, class: "dropdown-item my-0 text-black" %>
+            </li>
+            <li>
+              <%= link_to "Dashboard", admin_root_path , class: "dropdown-item my-0 text-black" %>
+            </li>
+            <li>
+             <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item my-0 text-black" %>
+            </li>
+            <% else %>
+             <li>
+              <%= link_to "Profile", users_path, class: "dropdown-item my-0 text-black" %>
+            </li>
+            <li>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item my-0 text-black" %>
+            </li>
+             <% end %>
+          </ul>
+        </li>
+        <% else %>
+          <li class="nav-item ms-auto">
+            <%= link_to "Login", new_user_session_path, class: "nav-link text-center my-0 text-light" %>
+          </li>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

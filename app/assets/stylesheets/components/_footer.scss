@@ -1,0 +1,26 @@
+
+.footer-menu .link-no-sub{
+  color: $purple1;
+  text-decoration: $text-no-decorate;
+  text-transform: capitalize;
+}
+
+.contact-item .area-no-sub{
+  color: $orange;
+  text-decoration: $text-no-decorate;
+}
+
+.contact-item .area-no-sub:hover {
+  color: #03A1E0; // Umanni color
+  opacity: 1;
+}
+
+.menu-list > li {
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.menu-list > li > a {
+   color: #03A1E0;
+   text-decoration: none;
+}

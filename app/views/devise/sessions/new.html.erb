@@ -1,0 +1,37 @@
+<div class="box-login">
+  <div class="card-login">
+    <div class="container p-1">
+        <div class="col-lg-12 text-light">
+          <div class="card-body">
+            <div class="card-title p-2">
+              <h2>
+                Log in
+              </h2>
+            </div>
+              <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: {turbo: false}) do |f| %>
+                  <div class="mb-4">
+                    <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: {
+                          autocomplete: "email", class: 'border-0 py-3' } %>
+                  </div>
+                  <div class="mb-4">
+                    <%= f.input :password,
+                        required: false,
+                        input_html: {
+                        autocomplete: "current-password", class: 'border-0 py-3' } %>
+                  </div>
+                  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                  <div class="form-actions">
+                    <%= f.button :submit,
+                        "Log in",
+                        class: "btn btn-primary text-light mb-3 py-3 px-5" %>
+                  </div>
+              <% end %>
+            <%= render "devise/shared/links" %>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

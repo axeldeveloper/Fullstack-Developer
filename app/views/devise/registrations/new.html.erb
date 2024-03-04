@@ -1,0 +1,51 @@
+<div class="box-login">
+  <div class="card-login">
+    <div class="container p-1">
+        <div class="col-lg-12 text-light">
+          <div class="card-body">
+            <div class="card-title p-2">
+              <h2>
+                Sign up
+              </h2>
+            </div>
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: {turbo: false}) do |f| %>
+              <%= f.error_notification %>
+                <div class="mb-4">
+                  <%= f.input :full_name,
+                    required: true,
+                    autofocus: true,
+                    input_html: { class: 'border-0 py-3' } %>
+                </div>
+                <div class="mb-4">
+                  <%= f.input :email,
+                      required: false,
+                      input_html: {
+                      autocomplete: "email", class: 'border-0 py-3' } %>
+                </div>
+                <div class="mb-4">
+                  <%= f.input :password,
+                    required: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: {
+                      autocomplete: "new-password",
+                      class: 'border-0 py-3'
+                    } %>
+                </div>
+                <div class="mb-4">
+                  <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: {
+                        autocomplete: "new-password",
+                        class: 'border-0 py-3' } %>
+                </div>
+                <div class="form-actions">
+                  <%= f.button :submit, "Sign up",
+                      class: "btn btn-primary text-light mb-3 py-3 px-5" %>
+                </div>
+            <% end %>
+            <%= render "devise/shared/links" %>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

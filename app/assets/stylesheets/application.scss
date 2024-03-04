@@ -1,0 +1,43 @@
+// Graphical variables
+@import "config/fonts";
+@import "config/colors";
+@import "config/bootstrap_variables";
+
+// External libraries
+@import "bootstrap/scss/bootstrap";
+@import "font-awesome";
+
+// Your CSS partials
+@import "components/index";
+@import "pages/index";
+
+.bg-black {
+  background: #27292d; // Umanni color
+}
+
+.bg-main{
+  background-color: $light-gray;
+  background-image: linear-gradient(43deg, #4e5472 0%, #6f576d 46%, #4e5472 100%);
+}
+
+.login-bg{
+  background-color: $background-b1;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+.me-4 {
+  margin-right: 1.5rem!important;
+}
+
+.nav-item > li  {
+  list-style: none;
+}
+
+
+.nav-item > li a{
+  list-style: none;
+}
+
+li,  a{
+  list-style: none;
+}
