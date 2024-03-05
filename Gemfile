@@ -95,6 +95,11 @@ group :test do
   gem 'factory_bot_rails', '~> 6.2'
 end
 
+
+group :test do
+  gem 'simplecov', require: false
+end
+
 gem "devise"
 gem "cloudinary"
 gem 'faker'

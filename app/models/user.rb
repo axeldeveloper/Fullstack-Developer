@@ -9,16 +9,6 @@ class User < ApplicationRecord
   has_one_attached :photo
 
   def self.ransackable_attributes(auth_object = nil)
-    [
-      "created_at",
-      "email",
-      "encrypted_password",
-      "full_name",
-      "id",
-      "remember_created_at",
-      "reset_password_sent_at",
-      "reset_password_token",
-      "role",
-      "updated_at"]
+    %w[created_at email encrypted_password full_name id remember_created_at reset_password_sent_at reset_password_token role updated_at]
   end
 end
