@@ -77,6 +77,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+   # Use Hotwire Live Reload for faster development [https://github.com/railsjazz/rails_live_reload]
+  gem 'hotwire-livereload', '~> 1.2', '>= 1.2.3'
+
+  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end
 
 group :test do
@@ -84,6 +88,11 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  # Use database_cleaner for cleaning up the database
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.2'
+
+  # Use factory_bot_rails for factories
+  gem 'factory_bot_rails', '~> 6.2'
 end
 
 gem "devise"
