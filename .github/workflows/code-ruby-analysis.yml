@@ -1,0 +1,36 @@
+name: CodeQL Analysis
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'ruby' ]
+        version: [ '2.7' ]  # Versão do Ruby que você está usando
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+
+    - name: Analyze with CodeQL
+      uses: github/codeql-action/analyze@v2
+      with:
+        # Diretório onde está o código do Rails
+        directory: 'path/to/your/rails/project'
+        # Caminho para o CodeQL queries (opcional)
+        queries: 'path/to/your/codeql/queries'
+
+    # Você pode adicionar mais passos aqui, como notificar sobre os resultados da análise, etc.
