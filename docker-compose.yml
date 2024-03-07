@@ -1,41 +1,57 @@
-version: '3'
+version: '3.4'
+
+x-rails-shared: &rails-shared
+  build:
+    context: .
+    dockerfile: Dockerfile
+    args:
+      PG_MAJOR: '13'
+      RUBY_VERSION: '3.2.2'
+  image: desafio_app_umanni:1.0
+  tmpfs:
+    - /tmp
+  stdin_open: true
+  tty: true
+  env_file:
+    - ./.env
+  volumes:
+    - .:/usr/src/app
+    - bundle:/usr/local/bundle
+    - history:/root/hist
+    - /tmp
+  depends_on:
+    - db
+  entrypoint: ./validate-migrated.sh
+
 
 services:
-#  app:
-#    build:
-#      context: ..
-#      dockerfile: .devcontainer/Dockerfile
-#
-#    volumes:
-#      - ../..:/workspaces:cached
-#
-#    networks:
-#      ktg-net:
-#
-#    environment:
-#      - SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub
+  web:
+    <<: *rails-shared
+    container_name: desafio_app_umanni
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    environment:
+      - HISTFILE=/usr/src/app/log/.bash_history
 
-  selenium_chrome:
-    image: selenium/standalone-chrome-debug
-    networks:
-      ktg-net:
+  db:
+    image: postgres:13
+    container_name: desafio_db_umanni
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U $${POSTGRES_USER} -h $${POSTGRES_HOST}
+      interval: 5s
 
-#  db:
-#    image: postgres:15.1
-#    # restart: unless-stopped
-#    volumes:
-#      - postgres-data:/var/lib/postgresql/data
-#      - ./create-db-user.sql:/docker-entrypoint-initdb.d/create-db-user.sql
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_DB: postgres
-#      POSTGRES_PASSWORD: postgres
-#
-#    networks:
-#      ktg-net:
-
-networks:
-  ktg-net:
 
 volumes:
-  postgres-data:
+  pg_data:
+  redis_data:
+  bundle:
+  history:

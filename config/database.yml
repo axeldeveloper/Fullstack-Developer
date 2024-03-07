@@ -5,7 +5,17 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+
 development:
+  <<: *default
+  database: <%= ENV['POSTGRES_DB'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  port: <%= ENV['POSTGRES_PORT'] %>
+
+
+local:
     <<: *default
     database: desafio_full_stack
     username: postgres
@@ -16,10 +26,10 @@ development:
 test:
   <<: *default
   database: desafio_full_test
-  username: postgres
-  password: postgres
-  host: localhost
-  port: 5432
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host:  <%= ENV['POSTGRES_HOST'] %>
+  port:  <%= ENV['POSTGRES_PORT'] %>
 
 production:
   <<: *default
