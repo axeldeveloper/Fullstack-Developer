@@ -9,14 +9,23 @@ require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-require 'rspec/autorun'
+require 'capybara/rspec'
+require 'selenium/webdriver'
+require 'capybara/rails'
+require 'capybara/minitest'
+require 'webdrivers'
+require 'selenium-webdriver'
+# require 'webdrivers/chromedriver'
 require 'simplecov'
+# require 'support/capybara'
+# require 'capybara-screenshot/rspec'
+
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 #SimpleCov.start do
 #  SimpleCov.coverage_dir('public/coverage')
 #end
 #puts "required simplecov"
-
 
 # If you are not using ActiveRecord, you can remove these lines.
 begin

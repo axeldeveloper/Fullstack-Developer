@@ -6,4 +6,14 @@ Rails.application.routes.draw do
   root to: "pages#home" # main page
 
   get "users", to: "users#show"
+
+  get "users/lists", to: "users#list_users"
+
+  # routes for api
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index]
+    end
+  end
+
 end

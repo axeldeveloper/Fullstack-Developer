@@ -3,4 +3,8 @@ class UsersController < ApplicationController
 
   def show
   end
+
+  def list_users
+  end
+
 end
